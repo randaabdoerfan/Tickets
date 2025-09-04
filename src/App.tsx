@@ -20,6 +20,8 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import TopBar from './components/TopBar';
 import SideBar from './components/SideBar';
+import { Outlet } from 'react-router-dom';
+import { Dashboard } from './pages/Dashboard';
 
 const drawerWidth = 240;
 
@@ -51,7 +53,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'flex-end',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
+
   ...theme.mixins.toolbar,
 }));
 
@@ -125,7 +127,7 @@ export default function MiniDrawer() {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <Typography sx={{ marginBottom: 2 }}>
-DashBoard
+        <Outlet/>
         </Typography>
 
       </Box>

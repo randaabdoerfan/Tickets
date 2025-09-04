@@ -29,7 +29,7 @@ import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import { useLocation, useNavigate } from "react-router-dom";
 import { grey } from "@mui/material/colors";
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
-import corelia from "../assets/corelia.jpeg"
+import corelia from "../assets/corelia.jpeg";
 
 const drawerWidth = 240;
 const openedMixin = (theme) => ({
@@ -81,36 +81,18 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const Array1 = [
-  { text: "Dashboard", icon: <DashboardOutlinedIcon />, path: "/" },
+  { text: "Dashboard", icon: <DashboardOutlinedIcon />, path: "/dashboard" },
   { text: "Tickets", path: "/tickets" },
-  {
-    text: "Teams",
-    
-    path: "/teams",
-  },
-  {
-    text: "Product",
-    
-    path: "/product",
-  },
-];
-
-const Array2 = [
+  {text: "Teams", path: "/teams",},
   { text: "Infrastructure", path: "/infrastructure" },
   { text: "Safe", path: "/safe" },
-  {
-    text: "Documents",
-   
-    path: "/documents",
-  },
-];
-
-const Array3 = [
+  {text: "Documents",path: "/documents" },
   { text: "Knowledge",  path: "/knowledge" },
   { text: "Tasks",  path: "/tasks" },
   { text: "Communication",  path: "/communication" },
   { text: "Reports",  path: "/reports" },
 ];
+
 
 const SideBar = ({ open, handleDrawerClose }) => {
   let location = useLocation();
@@ -176,87 +158,7 @@ const SideBar = ({ open, handleDrawerClose }) => {
         ))}
       </List>
 
-      <Divider />
 
-      <List>
-        {Array2.map((item) => (
-          <ListItem key={item.path} disablePadding sx={{ display: "block" }}>
-            <Tooltip title={open ? null : item.text} placement="left">
-              <ListItemButton
-                onClick={() => {
-                  navigate(item.path);
-                }}
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                  bgcolor:
-                    location.pathname === item.path
-                      ? theme.palette.mode === "dark"
-                        ? grey[800]
-                        : grey[300]
-                      : null,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  
-                </ListItemIcon>
-                <ListItemText
-                  primary={item.text}
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </Tooltip>
-          </ListItem>
-        ))}
-      </List>
-
-      <Divider />
-
-      <List>
-        {Array3.map((item) => (
-          <ListItem key={item.path} disablePadding sx={{ display: "block" }}>
-            <Tooltip title={open ? null : item.text} placement="left">
-              <ListItemButton
-                onClick={() => {
-                  navigate(item.path);
-                }}
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                  bgcolor:
-                    location.pathname === item.path
-                      ? theme.palette.mode === "dark"
-                        ? grey[800]
-                        : grey[300]
-                      : null,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  
-                </ListItemIcon>
-                <ListItemText
-                  primary={item.text}
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </Tooltip>
-          </ListItem>
-        ))}
-      </List>
     </Drawer>
   );
 };

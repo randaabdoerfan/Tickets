@@ -7,6 +7,7 @@ import {
   styled,
   useTheme,
   Typography,
+  Avatar,
 
 } from "@mui/material";
 import React from "react";
@@ -21,6 +22,8 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ReactCountryFlag from "react-country-flag";
 import Divider from "@mui/material/Divider";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 const drawerWidth = 240;
 
@@ -47,9 +50,10 @@ const AppBar = styled(MuiAppBar, {
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
-  borderRadius: 15,
+  borderRadius: 25,
   minWidth:350,
   maxWidth:370,
+  height:50,
   backgroundColor: alpha(theme.palette.grey[500], 0.15),
   "&:hover": {
     backgroundColor: alpha(theme.palette.grey[500], 0.25),
@@ -69,6 +73,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   position: "absolute",
   pointerEvents: "none",
   display: "flex",
+  textAlign:"center",
   alignItems: "center",
   justifyContent: "center",
 }));
@@ -77,7 +82,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
+
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -86,8 +91,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}));
 
-const TopBar = ({ open, handleDrawerOpen, setMode }) => {
+const TopBar = ({ open, handleDrawerOpen }) => {
   const theme = useTheme();
   return (
     <AppBar
@@ -134,18 +147,29 @@ const TopBar = ({ open, handleDrawerOpen, setMode }) => {
 
           
 
-          <IconButton color="inherit"
-           sx={{
-      marginRight :2,}}
-      >
-            <Person2OutlinedIcon />
-            <div style={{ display: "flex", gap: "15px" }}>
+          <IconButton color="inherit">
+
+            <div style={{ display: "flex", gap: "15px" ,marginRight:"10px"}}>
           
           <ReactCountryFlag 
           countryCode="US" svg style={{ width: "1.5em",marginRight:"4", height: "1.5em" }} />
         
-      <ReactCountryFlag countryCode="EG" svg style={{ width: "1.5em",marginLeft:"4", height: "1.5em" }} />
+      <ReactCountryFlag countryCode="EG" svg style={{ width: "1.5em",marginLeft:"4",marginRight:"4", height: "1.5em" }} />
       </div>
+
+      <Divider />
+      <Avatar
+        sx={{
+          mx: "auto",
+          width:  45 ,
+          height: 45 ,
+          my: 1,
+          border: "2px solid grey",
+          transition: "0.25s",
+        }}
+        alt="Remy Sharp"
+        src="https://thvnext.bing.com/th/id/OIP.X9MGZ-hPQ23e5lNffa7V-wHaE8?o=7&cb=ucfimgc2rm=3&rs=1&pid=ImgDetMain&o=7&rm=3"
+      />
       <Typography
        align="center"
     sx={{
