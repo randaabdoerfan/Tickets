@@ -21,6 +21,7 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ReactCountryFlag from "react-country-flag";
 import Divider from "@mui/material/Divider";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -89,6 +90,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const TopBar = ({ open, handleDrawerOpen, setMode }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
   return (
     <AppBar
       position="fixed"
@@ -123,7 +125,7 @@ const TopBar = ({ open, handleDrawerOpen, setMode }) => {
 
         <Stack direction={"row"}>
 
-          <IconButton color="inherit">
+          <IconButton color="inherit" onClick={() => navigate("/mail")}>
             <MailOutlineIcon />
           </IconButton>
 
