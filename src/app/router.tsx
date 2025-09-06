@@ -7,7 +7,7 @@ const router = createBrowserRouter(
     <>
      <Route path="/" element={<App />}>
 
-    <Route path="/mail" element= {<MailPage/>}/>
+    <Route path="mail" element= {<MailPage/>}/>
     </Route>
   
     

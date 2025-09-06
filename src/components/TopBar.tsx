@@ -125,7 +125,7 @@ const TopBar = ({ open, handleDrawerOpen, setMode }) => {
 
         <Stack direction={"row"}>
 
-          <IconButton color="inherit" onClick={() => navigate("/mail")}>
+          <IconButton color="inherit" onClick={() => navigate("mail")}>
             <MailOutlineIcon />
           </IconButton>
 
