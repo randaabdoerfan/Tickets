@@ -1,148 +1,80 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import './AddTicketForm.css'
+import StepIndicator from './StepIndicator'
+import AuthorStep from '../components/AuthorStep'
+import AssignmentStep from '../components/AssignmentStep'
+import ModelCatalogStep from '../components/ModelCatalogStep'
+import IncidentStep from '../components/IncidentStep'
 
 const AddTicketForm = () => {
-  const navigate = useNavigate()
+  const [currentStep, setCurrentStep] = useState(1)
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    priority: '',
-    category: '',
-    assignedTo: '',
-    dueDate: ''
+    organization: '',
+    author: null,
+    assignedUser: null,
+    selectedModel: null,
+    incident: {
+      title: '',
+      description: '',
+      priority: '',
+      application: '',
+      category: ''
+    }
   })
 
-  const priorities = ['Low', 'Medium', 'High', 'Critical']
-  const categories = ['Bug', 'Feature Request', 'Support', 'Infrastructure', 'Documentation']
-  const assignees = ['Rasha', 'Ahmed', 'Sara', 'Mohamed', 'Fatima']
+  const steps = [
+    { number: 1, title: 'Author', component: AuthorStep },
+    { number: 2, title: 'Assignment', component: AssignmentStep },
+    { number: 3, title: 'Model Catalog', component: ModelCatalogStep },
+    { number: 4, title: 'Incident', component: IncidentStep }
+  ]
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
+  const handleNext = () => {
+    if (currentStep < steps.length) {
+      setCurrentStep(currentStep + 1)
+    }
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log('Ticket submitted:', formData)
-    navigate('/product')
+  const handlePrevious = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1)
+    }
   }
 
-  const handleCancel = () => {
-    navigate('/product')
+  const handleStepClick = (stepNumber) => {
+    setCurrentStep(stepNumber)
   }
+
+  const updateFormData = (data) => {
+    setFormData(prev => ({ ...prev, ...data }))
+  }
+
+  const CurrentStepComponent = steps[currentStep - 1].component
 
   return (
-    <div className="add-ticket-form">
-      <div className="form-header">
-        <h1>New Ticket</h1>
-        <p>Create a new support ticket</p>
-      </div>
-
-      <div className="form-container">
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="title">Title *</label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-              required
-              placeholder="Enter ticket title"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="description">Description *</label>
-            <textarea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              required
-              placeholder="Describe the issue or request"
-              rows="4"
-            />
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="priority">Priority *</label>
-              <select
-                id="priority"
-                name="priority"
-                value={formData.priority}
-                onChange={handleChange}
-                required
-              >
-                <option value="">Select Priority</option>
-                {priorities.map(priority => (
-                  <option key={priority} value={priority}>{priority}</option>
-                ))}
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="category">Category *</label>
-              <select
-                id="category"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                required
-              >
-                <option value="">Select Category</option>
-                {categories.map(category => (
-                  <option key={category} value={category}>{category}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="assignedTo">Assigned To</label>
-              <select
-                id="assignedTo"
-                name="assignedTo"
-                value={formData.assignedTo}
-                onChange={handleChange}
-              >
-                <option value="">Select Assignee</option>
-                {assignees.map(assignee => (
-                  <option key={assignee} value={assignee}>{assignee}</option>
-                ))}
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="dueDate">Due Date</label>
-              <input
-                type="date"
-                id="dueDate"
-                name="dueDate"
-                value={formData.dueDate}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-
-          <div className="form-actions">
-            <button type="button" className="btn btn-cancel" onClick={handleCancel}>
-              Cancel
-            </button>
-            <button type="submit" className="btn btn-send">
-              Send
-            </button>
-          </div>
-        </form>
+    <div className="max-w-4xl mx-auto">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div className="p-6 border-b border-gray-200">
+          <StepIndicator 
+            steps={steps} 
+            currentStep={currentStep} 
+            onStepClick={handleStepClick}
+          />
+        </div>
+        
+        <div className="p-6">
+          <CurrentStepComponent 
+            formData={formData}
+            updateFormData={updateFormData}
+            onNext={handleNext}
+            onPrevious={handlePrevious}
+            isFirstStep={currentStep === 1}
+            isLastStep={currentStep === steps.length}
+          />
+        </div>
       </div>
     </div>
   )
 }
 
 export default AddTicketForm
+
