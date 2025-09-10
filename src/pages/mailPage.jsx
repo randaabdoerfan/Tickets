@@ -1,4 +1,4 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -11,6 +11,8 @@ import {
   Checkbox,
   TextField,
 } from "@mui/material";
+import { useState } from "react";
+
 
 const mails = [
   {
@@ -37,6 +39,19 @@ const mails = [
 ];
 
 export default function MailPage() {
+  const navigate = useNavigate();
+  const [selected, setSelected] = useState([]); 
+
+  const handleCheckboxChange = (id) => {
+    setSelected((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    );
+  };
+
+  const handleNameClick = (id) => {
+    navigate(`/maildetials/${id}`); // navigate to a detailed page for that email
+  };
+
   return (
     <Box sx={{
        
@@ -64,7 +79,8 @@ export default function MailPage() {
       sx={{  bgcolor: "#00A099", 
         fontSize: "16px",   
     padding: "10px 20px",
-       }}>
+       }}
+       onClick={() => navigate("/newmail")}>
           New Email
         </Button>
       </Box>
@@ -164,23 +180,45 @@ export default function MailPage() {
 
       </Box>
 
-      <Table>
-        <TableBody>
-          {mails.map((mail) => (
-            <TableRow key={mail.id} hover>
-              <TableCell padding="checkbox" >
-                <Checkbox />
-              </TableCell>
-              <TableCell sx={{color:"#6E6B7B"}}>{mail.name}</TableCell>
-              <TableCell sx={{color:"#6E6B7B"}}>{mail.subject}</TableCell>
-             <TableCell sx={{ color: "#6E6B7B", whiteSpace: "pre-line" }}>
-  {mail.date.split(" ")[0]} <br />
-  {mail.date.split(" ").slice(1).join(" ")}
-</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+     <Table>
+          <TableBody>
+            {mails.map((mail) => {
+              const isChecked = selected.includes(mail.id);
+              return (
+                <TableRow key={mail.id} hover>
+                  <TableCell padding="checkbox">
+                    <Checkbox
+                      checked={isChecked}
+                      onChange={() => handleCheckboxChange(mail.id)}
+                      sx={{
+                        color: isChecked ? "red" : undefined,
+                        "&.Mui-checked": {
+                          color: "red", // Makes the checkbox red when checked
+                        },
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      color: "#6E6B7B",
+                      cursor: "pointer",
+                      "&:hover": { color: "blue" }, // Optional hover effect
+                    }}
+                    onClick={() => handleNameClick(mail.id)}
+                  >
+                    {mail.name}
+                  </TableCell>
+                  <TableCell sx={{ color: "#6E6B7B" }}>{mail.subject}</TableCell>
+                  <TableCell sx={{ color: "#6E6B7B", whiteSpace: "pre-line" }}>
+                    {mail.date.split(" ")[0]} <br />
+                    {mail.date.split(" ").slice(1).join(" ")}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+   
       </Box>
     </Box>
   );

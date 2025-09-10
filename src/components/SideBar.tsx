@@ -262,3 +262,4 @@ const SideBar = ({ open, handleDrawerClose }) => {
 };
 
 export default SideBar;
+
