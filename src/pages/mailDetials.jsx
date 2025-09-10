@@ -48,24 +48,24 @@ export default function MailDetials() {
         </Typography>
         <Box>
             <Typography variant="caption" color="text.secondary" sx={{ mb: 2 }}>
-          {/* {mail.date} */}
-          11/44/
+          {mail.date}
+          
         </Typography>
-        <img src={UploadIcon} alt="upload" style={{ width: "10px", height: "14px" }} />
+        <img src={UploadIcon} alt="upload" style={{ width: "10px", height: "14px", margin: "0 2px" }} />
          <img 
   src={TrashIcon} 
   alt="Trash" 
-  style={{ width: "20px", height: "20px" ,color:"black" }} 
+  style={{ width:"20px"}} 
 />
-         <img src={RightArrow} alt="Trash" style={{ width: "10px", height: "14px" }}/>
+         <img src={RightArrow} alt="Trash" style={{ width: "10px", height: "14px" ,margin: "0 2px" }}/>
          
         </Box>
         </Box>
 
-        <Typography variant="body1" sx={{ my: 2 }}>
+        <Typography variant="body1" sx={{ my: 2  ,padding :"0.5rem 7rem 0rem 0.9rem"}}>
           {mail.subject}
         </Typography>
-        <Typography variant="body2" sx={{ whiteSpace: "pre-line", mb: 3 }}>
+        <Typography variant="body2" sx={{ whiteSpace: "pre-line", mb: 3 ,padding :"0 7rem 0 0.9rem"}}>
           {mail.content || mail.subject}
         </Typography>
 
