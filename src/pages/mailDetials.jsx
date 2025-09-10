@@ -1,11 +1,9 @@
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { Box, Button, Typography } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import RightArrow from "../assets/Vector.svg";
 import LeftArrow from "../assets/Left.svg";
 import TrashIcon from "../assets/Trash.svg";
-import UploadIcon from "../assets/upload.svg"
-
+import UploadIcon from "../assets/upload.svg";
 
 export default function MailDetials() {
   const { id } = useParams();
@@ -22,13 +20,15 @@ export default function MailDetials() {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
+      {/* Header */}
+      <Typography variant="h6" sx={{ mb: 1, fontWeight: "bold" }}>
         Dashboard
       </Typography>
       <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
         Welcome to #1 ticket management platform in Egypt.
       </Typography>
 
+      {/* Mail Container */}
       <Box
         sx={{
           bgcolor: "white",
@@ -37,62 +37,66 @@ export default function MailDetials() {
           border: "1px solid #E0E0E0",
         }}
       >
-        <Box 
-        sx= {{
-            display:"flex",
-            justifyContent:"space-between"
-        }}
+        {/* Top Row (Name + Date + Icons) */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            mb: 2,
+          }}
         >
-            <Typography variant="subtitle2" sx={{ color: "gray", mb: 1 }}>
-          {mail.name} &lt;RASDFDI.ai&gt;
-        </Typography>
-        <Box>
-            <Typography variant="caption" color="text.secondary" sx={{ mb: 2 }}>
-          {mail.date}
-          
-        </Typography>
-        <img src={UploadIcon} alt="upload" style={{ width: "10px", height: "14px", margin: "0 2px" }} />
-         <img 
-  src={TrashIcon} 
-  alt="Trash" 
-  style={{ width:"20px"}} 
-/>
-         <img src={RightArrow} alt="Trash" style={{ width: "10px", height: "14px" ,margin: "0 2px" }}/>
-         
-        </Box>
+          <Typography variant="subtitle2" sx={{ color: "gray" }}>
+            {mail.name} &lt;RASDFDI.ai&gt;
+          </Typography>
+
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <Typography variant="caption" color="text.secondary">
+              {mail.date}
+            </Typography>
+            <img src={UploadIcon} alt="upload" style={{ width: "12px", height: "14px" }} />
+            <img src={TrashIcon} alt="trash" style={{ width: "18px", height: "18px" }} />
+            <img src={RightArrow} alt="next" style={{ width: "10px", height: "14px" }} />
+          </Box>
         </Box>
 
-        <Typography variant="body1" sx={{ my: 2  ,padding :"0.5rem 7rem 0rem 0.9rem"}}>
+        {/* Subject */}
+        <Typography variant="body1" >
           {mail.subject}
         </Typography>
-        <Typography variant="body2" sx={{ whiteSpace: "pre-line", mb: 3 ,padding :"0 7rem 0 0.9rem"}}>
+
+        {/* Content */}
+        <Typography variant="body2" sx={{ whiteSpace: "pre-line", mb: 3 }}>
           {mail.content || mail.subject}
         </Typography>
 
+        {/* Action Buttons */}
         <Box sx={{ display: "flex", gap: 2 }}>
           <Button
-          sx ={{ border:"1px solid #717579",
-            padding:"10px  45px  ",
-            color:"black",
-            fontFamily:"Replay"
-
-          }}
             variant="outlined"
+            startIcon={<img src={RightArrow} alt="reply" style={{ width: "18px", height: "18px" }} />}
+            sx={{
+              border: "1px solid #717579",
+              px: 5,
+              color: "black",
+              fontFamily: "Arial",
+            }}
             onClick={() => navigate(-1)}
           >
-             <img src={RightArrow} alt="Trash" style={{ padding:"2px ", width: "20px", height: "25px" }}/>
             Reply
           </Button>
-          <Button
-          sx ={{ border:"1px solid #717579",
-            padding:"10px 45px  ",
-            color:"black",
-            fontFamily:"Replay"
 
-          }}
+          <Button
             variant="outlined"
+            startIcon={<img src={LeftArrow} alt="forward" style={{ width: "18px", height: "18px" }} />}
+            sx={{
+              border: "1px solid #717579",
+              px: 5,
+              color: "black",
+              fontFamily: "Arial",
+            }}
             onClick={() => navigate(-1)}
-          > <img src={LeftArrow} alt="Trash" style={{ padding:"2px ", width: "25px", height: "25px" }}/>
+          >
             Forward
           </Button>
         </Box>
