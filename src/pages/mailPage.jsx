@@ -48,9 +48,9 @@ export default function MailPage() {
     );
   };
 
-  const handleNameClick = (id) => {
-    navigate(`/maildetials/${id}`); // navigate to a detailed page for that email
-  };
+  const handleNameClick = (mail) => {
+  navigate(`/maildetials/${mail.id}`, { state: mail });
+};
 
   return (
     <Box sx={{
@@ -204,7 +204,7 @@ export default function MailPage() {
                       cursor: "pointer",
                       "&:hover": { color: "blue" }, // Optional hover effect
                     }}
-                    onClick={() => handleNameClick(mail.id)}
+                    onClick={() => handleNameClick(mail)}
                   >
                     {mail.name}
                   </TableCell>
