@@ -8,10 +8,14 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import router from "./app/router";
+
+
 import App from "./App";
 import { Dashboard } from "./pages/Dashboard";
 import { Teams } from "./pages/Teams";
 import { Tickets } from "./pages/Tickets";
+
 
 
 const router = createBrowserRouter(
