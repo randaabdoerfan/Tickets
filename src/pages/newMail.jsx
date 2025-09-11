@@ -12,7 +12,7 @@ import imageIcon from "../assets/rectangle.svg";
 
 export default function NewMail() {
   return (
-    <Box>
+    <Box sx={{ p: { xs: 2, sm: 3, md: 4 } }}>
       <Box>
         <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
           New Mail
@@ -21,15 +21,14 @@ export default function NewMail() {
           Welcome to #1 ticket management platform in Egypt.
         </Typography>
       </Box>
-
       <Box
         sx={{
-          maxWidth: "700px",
+          maxWidth: { xs: "100%", sm: "90%", md: "700px" },
           margin: "20px auto",
           backgroundColor: "white",
           borderRadius: "8px",
-          boxShadow: "0 5px 0px rgba(254, 255, 254, 1)",
-          padding: "2px 19px",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
+          p: { xs: 2, sm: 3 },
         }}
       >
         <TextField
@@ -40,7 +39,7 @@ export default function NewMail() {
             sx: {
               fontSize: "14px",
               height: "19px",
-              padding: "12px 8px",
+              p: "12px 8px",
             },
           }}
           InputLabelProps={{
@@ -58,7 +57,7 @@ export default function NewMail() {
             sx: {
               fontSize: "14px",
               height: "19px",
-              padding: "12px 8px",
+              p: "12px 8px",
             },
           }}
           InputLabelProps={{
@@ -67,7 +66,6 @@ export default function NewMail() {
             },
           }}
         />
-
         <TextField
           fullWidth
           variant="standard"
@@ -76,7 +74,7 @@ export default function NewMail() {
             sx: {
               fontSize: "14px",
               height: "19px",
-              padding: "12px 8px",
+              p: "12px 8px",
             },
           }}
           InputLabelProps={{
@@ -86,6 +84,7 @@ export default function NewMail() {
           }}
         />
 
+  
         <TextField
           fullWidth
           multiline
@@ -102,31 +101,21 @@ export default function NewMail() {
         <Box
           sx={{
             display: "flex",
-            justifyContent: "end",
-            alignItems: "center",
+            flexDirection: { xs: "column", sm: "row" }, 
+            justifyContent: "space-between",
+            alignItems: { xs: "stretch", sm: "center" },
+            gap: 2,
           }}
         >
-          <Box>
+          <Box sx={{ display: "flex", gap: 1, justifyContent: { xs: "center", sm: "start" } }}>
             <IconButton>
-              <img
-                src={AttachIcon}
-                alt="Attachfile"
-                style={{ width: "35px", height: "35px" }}
-              />
+              <img src={AttachIcon} alt="Attachfile" style={{ width: "28px", height: "28px" }} />
             </IconButton>
             <IconButton>
-              <img
-                src={imageIcon}
-                alt="image"
-                style={{ width: "20px", height: "30px" }}
-              />
+              <img src={imageIcon} alt="image" style={{ width: "20px", height: "28px" }} />
             </IconButton>
             <IconButton>
-              <img
-                src={TrashIcon}
-                alt="Trash"
-                style={{ width: "35px", height: "35px" }}
-              />
+              <img src={TrashIcon} alt="Trash" style={{ width: "28px", height: "28px" }} />
             </IconButton>
           </Box>
 
@@ -134,9 +123,11 @@ export default function NewMail() {
             variant="contained"
             sx={{
               bgcolor: "#0060FF",
-              px: 4,
+              px: { xs: 2, sm: 4 },
               borderRadius: "4px",
               textTransform: "none",
+              alignSelf: { xs: "center", sm: "flex-end" },
+              width: { xs: "100%", sm: "auto" }, 
             }}
           >
             Send

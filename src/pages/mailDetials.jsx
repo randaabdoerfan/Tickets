@@ -10,7 +10,7 @@ export default function MailDetials() {
   const { state } = useLocation();
   const navigate = useNavigate();
 
-  // If user refreshes the page and state is lost, fetch by ID (optional)
+
   const mail = state || {
     name: "Unknown",
     subject: "No subject available",
@@ -19,39 +19,41 @@ export default function MailDetials() {
   };
 
   return (
-    <Box sx={{ p: 3 }}>
-      {/* Header */}
-      <Typography variant="h6" sx={{ mb: 1, fontWeight: "bold" }}>
+    <Box sx={{ p: { xs: 2, sm: 3 } }}>
+      
+      <Typography variant="h6" sx={{ mb: 1, fontWeight: "bold", fontSize: { xs: "1.1rem", sm: "1.25rem" } }}>
         Dashboard
       </Typography>
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+      <Typography variant="body2" color="text.secondary" sx={{ mb: 3, fontSize: { xs: "0.8rem", sm: "0.9rem" } }}>
         Welcome to #1 ticket management platform in Egypt.
       </Typography>
 
-      {/* Mail Container */}
+      
       <Box
         sx={{
           bgcolor: "white",
-          p: 3,
+          p: { xs: 2, sm: 3 },
           borderRadius: "8px",
           border: "1px solid #E0E0E0",
         }}
       >
-        {/* Top Row (Name + Date + Icons) */}
+        
         <Box
           sx={{
             display: "flex",
+            flexDirection: { xs: "column", sm: "row" }, // stack on mobile
             justifyContent: "space-between",
-            alignItems: "center",
+            alignItems: { xs: "flex-start", sm: "center" },
             mb: 2,
+            gap: { xs: 1, sm: 0 },
           }}
         >
-          <Typography variant="subtitle2" sx={{ color: "gray" }}>
+          <Typography variant="subtitle2" sx={{ color: "gray", fontSize: { xs: "0.8rem", sm: "0.9rem" } }}>
             {mail.name} &lt;RASDFDI.ai&gt;
           </Typography>
 
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <Typography variant="caption" color="text.secondary">
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1, mt: { xs: 1, sm: 0 } }}>
+            <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: "0.7rem", sm: "0.75rem" } }}>
               {mail.date}
             </Typography>
             <img src={UploadIcon} alt="upload" style={{ width: "12px", height: "14px" }} />
@@ -60,26 +62,33 @@ export default function MailDetials() {
           </Box>
         </Box>
 
-        {/* Subject */}
-        <Typography variant="body1" >
+       
+        <Typography variant="body1" sx={{ fontSize: { xs: "0.95rem", sm: "1rem" }, mb: 1 }}>
           {mail.subject}
         </Typography>
 
-        {/* Content */}
-        <Typography variant="body2" sx={{ whiteSpace: "pre-line", mb: 3 }}>
+       
+        <Typography
+          variant="body2"
+          sx={{
+            whiteSpace: "pre-line",
+            mb: 3,
+            fontSize: { xs: "0.85rem", sm: "0.9rem" },
+          }}
+        >
           {mail.content || mail.subject}
         </Typography>
-
-        {/* Action Buttons */}
-        <Box sx={{ display: "flex", gap: 2 }}>
+        <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 2 }}>
           <Button
             variant="outlined"
             startIcon={<img src={RightArrow} alt="reply" style={{ width: "18px", height: "18px" }} />}
             sx={{
               border: "1px solid #717579",
-              px: 5,
+              px: { xs: 2, sm: 5 },
+              py: { xs: 1, sm: 1.5 },
               color: "black",
-              fontFamily: "Arial",
+              fontSize: { xs: "0.8rem", sm: "0.9rem" },
+              width: { xs: "100%", sm: "auto" }, 
             }}
             onClick={() => navigate(-1)}
           >
@@ -91,9 +100,11 @@ export default function MailDetials() {
             startIcon={<img src={LeftArrow} alt="forward" style={{ width: "18px", height: "18px" }} />}
             sx={{
               border: "1px solid #717579",
-              px: 5,
+              px: { xs: 2, sm: 5 },
+              py: { xs: 1, sm: 1.5 },
               color: "black",
-              fontFamily: "Arial",
+              fontSize: { xs: "0.8rem", sm: "0.9rem" },
+              width: { xs: "100%", sm: "auto" },
             }}
             onClick={() => navigate(-1)}
           >
